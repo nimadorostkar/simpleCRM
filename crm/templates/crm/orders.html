@@ -1,18 +1,23 @@
 {% extends 'crm/main.html' %}
 {% block content %}
+{% load jalali_tags %}
+
+
+
 
 <div class="d-flex justify-content-end">
   <a class="btn btn-warning" href="{% url 'create_order' %}">+ Order</a>
 </div>
 
-<div class="container w-100 d-flex justify-content-center mt-4">
+<div class="container w-100 d-flex justify-content-center mt-4" dir="rtl" align="right">
   <table class="my-table w-100 text-center">
     <thead class="text-center">
       <tr class="text-center">
-        <th>Products</th>
-        <th>Customer</th>
-        <th>Date Ordered</th>
-        <th>Status</th>
+        <th>محصول</th>
+        <th>مشتری</th>
+        <th>اطلاعات تکمیلی</th>
+        <th>تاریخ</th>
+        <th>وضعیت</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -21,7 +26,8 @@
       <tr>
         <th scope="row">{{o.product.name}}</th>
         <td>{{ o.customer.name }}</td>
-        <td>{{ o.date_created|date:"d-m-Y h:i A" }}</td>
+        <td>{{ o.additional_information}}</td>
+        <td>{{ o.j_date_created }}</td>
         <td>{{o.status}}</td>
         <td>
           <a class="btn btn-sm btn-outline-dark" href="{% url 'update_order' o.id %}"><svg width="1em" height="1em"

@@ -1,13 +1,17 @@
 {% extends 'crm/main.html' %}
 {% block content %}
+{% load jalali_tags %}
 
-<table class="my-table w-100 text-center mt-4">
+
+
+<table class="my-table w-100 text-center mt-4" dir="rtl" align="right">
     <thead>
         <tr class="text-center">
 
-            <th scope="col">Product</th>
-            <th scope="col">Date Ordered</th>
-            <th scope="col">Status</th>
+            <th scope="col">محصول</th>
+            <th scope="col">تصویر</th>
+            <th scope="col">تاریخ</th>
+            <th scope="col">وضعیت</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -15,7 +19,8 @@
         {% for o in order %}
         <tr>
             <th scope="row">{{ o.product }}</th>
-            <td>{{ o.date_created }}</td>
+            <td> <img style="max-width:40px;" src="{{ o.product.image.url }}"> </td>
+            <td>{{ o.j_date_created }}</td>
             <td>{{ o.status }}</td>
             <td>
                 <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#actionModal"><svg width="1em"

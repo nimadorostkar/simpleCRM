@@ -15,5 +15,13 @@ admin.site.register(models.Product, ProductAdmin)
 
 
 
-admin.site.register(Customer)
+#------------------------------------------------------------------------------
+class CustomerAdmin(ImportExportModelAdmin):
+    list_display = ('name','phone', 'address')
+    search_fields = ['name']
+
+admin.site.register(models.Customer, CustomerAdmin)
+
+
+
 admin.site.register(Order)

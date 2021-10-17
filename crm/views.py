@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+
+
+
+
 @login_required
 def dashboard(request):
     orders = Order.objects.all()
@@ -23,6 +27,10 @@ def dashboard(request):
     'total_orders':total_orders, 'recent_orders':recent_orders,'og':og}
     return render(request,'crm/dashboard.html', context)
 
+
+
+
+
 @login_required
 def products(request):
     products = Product.objects.all()
@@ -30,11 +38,20 @@ def products(request):
     products = pf.qs
     return render(request,'crm/products.html',{'products':products,'pf':pf})
 
+
+
+
+
 @login_required
 def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     product.delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+
 
 @login_required
 def update_product(request, pk):
@@ -48,6 +65,11 @@ def update_product(request, pk):
     context = {'form': form}
     return render(request,'crm/form_page.html',context)
 
+
+
+
+
+
 @login_required
 def create_product(request):
     form = ProductForm()
@@ -59,22 +81,36 @@ def create_product(request):
     context = {'form':form}
     return render(request,'crm/form_page.html', context)
 
+
+
+
+
 @login_required
 def orders(request):
     orders = Order.objects.order_by("-date_created")
     return render(request,'crm/orders.html',{'orders':orders})
+
+
+
+
+
 
 @login_required
 def contacts(request):
     req = request.GET.get('search',None)
     if req is not None:
         query = request.GET.get('search')
-        customers = Customer.objects.filter(Q(name__icontains=query) | Q(email__icontains=query)
+        customers = Customer.objects.filter(Q(name__icontains=query) | Q(additional_information__icontains=query)
         | Q(phone__icontains=query)
         | Q(address__icontains=query))
     else:
         customers = Customer.objects.all()
     return render(request,'crm/contacts.html',{'customers':customers})
+
+
+
+
+
 
 @login_required
 def add_contact(request):
@@ -86,6 +122,10 @@ def add_contact(request):
             return redirect('/contacts')
     context = {'form':form}
     return render(request,"crm/form_page.html",context)
+
+
+
+
 
 @login_required
 def update_contact(request, pk):
@@ -99,11 +139,18 @@ def update_contact(request, pk):
     context = {'form': form}
     return render(request,'crm/form_page.html',context)
 
+
+
+
 @login_required
 def delete_contact(request, pk):
     contact = Customer.objects.get(id=pk)
     contact.delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+
 
 @login_required
 def customer_orders(request, pk):
@@ -112,6 +159,10 @@ def customer_orders(request, pk):
     total_orders = order.count()
     context = {'customer':customer,'order':order, 'total_orders':total_orders}
     return render(request,'crm/customer_orders.html', context)
+
+
+
+
 
 @login_required
 def create_order(request):
@@ -124,6 +175,10 @@ def create_order(request):
     context = {'form':form}
     return render(request,'crm/form_page.html', context)
 
+
+
+
+
 @login_required
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
@@ -135,12 +190,21 @@ def update_order(request, pk):
             return redirect('/orders')
     context = {'form': form}
     return render(request,'crm/form_page.html',context)
-    
+
+
+
+
+
+
 @login_required
 def delete_order(request, pk):
     order = Order.objects.get(id=pk)
     order.delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+
 
 
 def signin(request):
@@ -154,6 +218,11 @@ def signin(request):
         else:
             messages.info(request,"Username or Password is not correct.")
     return render(request, 'crm/signin.html',{})
+
+
+
+
+
 
 def signout(request):
     logout(request)

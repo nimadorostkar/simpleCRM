@@ -5,7 +5,7 @@
   {% csrf_token %}
   <div class="row">
     <div class="col-3">
-      <input type="text" class="form-control" name="task_name" placeholder="Task name">
+      <input type="text" class="form-control" name="task_name" placeholder="assign to">
     </div>
     <div class="col-8">
       <input type="text" class="form-control" name="task_desc" placeholder="Description"></input>
@@ -15,14 +15,14 @@
     </div>
   </div>
 </form>
-<div class="container w-100 d-flex justify-content-center mt-4">
+<div class="container w-100 d-flex justify-content-center mt-4" dir="rtl" align="right">
 
   <table class="my-table w-100 text-center">
     <thead>
       <tr class="text-center">
-        <th scope="col">Task</th>
-        <th scope="col">Description</th>
-        <th scope="col">Date</th>
+        <th scope="col">شخص</th>
+        <th scope="col">شرح</th>
+        <th scope="col">تاریخ</th>
         <th scope="col"></th>
       </tr>
     </thead>

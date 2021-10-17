@@ -24,10 +24,10 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=200, null=True)
-    cost = models.FloatField(null=True)
-    vendor = models.CharField(max_length=200, null=True)
-    discount = models.IntegerField(default=0)
+    name = models.CharField(max_length=200, null=True,verbose_name = "نام")
+    cost = models.FloatField(null=True,verbose_name = "قیمت")
+    vendor = models.CharField(max_length=200, null=True,verbose_name = "فروشنده")
+    discount = models.IntegerField(default=0,verbose_name = "تخفیف")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
 
