@@ -19,7 +19,6 @@
         <th scope="col">#</th>
         <th scope="col">نام محصول</th>
         <th scope="col">فروشنده</th>
-        <th scope="col">تاریخ</th>
         <th scope="col">تخفیف</th>
         <th scope="col">قیمت</th>
         <th scope="col">تصویر</th>
@@ -32,7 +31,6 @@
         <th scope="row">{{ p.pk }}</th>
         <td>{{ p.name }}</td>
         <td>{{ p.vendor }}</td>
-        <td>{{ p.j_date_created }}</td>
         <td>{{ p.discount }}</td>
         <td>{{ p.cost }}</td>
         <td> <img style="max-width:40px;" src="{{ p.image.url }}"> </td>

@@ -28,7 +28,6 @@ class Product(models.Model):
     cost = models.FloatField(null=True,verbose_name = "قیمت")
     vendor = models.CharField(max_length=200, null=True,verbose_name = "فروشنده")
     discount = models.IntegerField(default=0,verbose_name = "تخفیف")
-    date_created = models.DateField(auto_now_add=True, null=True)
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
 
     def __str__(self):
@@ -37,8 +36,7 @@ class Product(models.Model):
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
 
-    def j_date_created(self):
-        return jalali_converter(self.date_created)
+
 
 
 
@@ -57,13 +55,13 @@ class Order(models.Model):
         ('CANCELED','CANCELED'),
         ('COMPLETED','COMPLETED'),
         ('PAID','PAID'),
+        ('PREPAID PAYMENT','PREPAID PAYMENT'),
         ('PENDING PAYMENT','PENDING PAYMENT'),
     ),verbose_name = "وضعیت")
 
 
     def j_date_created(self):
         return jalali_converter(self.date_created)
-
 
 
 
