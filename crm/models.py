@@ -10,11 +10,12 @@ from extensions.utils import jalali_converter
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=200, null=True)
-    phone = models.CharField(max_length=200, null=True)
-    email = models.EmailField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True,verbose_name = "نام")
+    phone = models.CharField(max_length=200, null=True,verbose_name = "تلفن")
+    additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
+    address = models.CharField(max_length=200, null=True,verbose_name = "آدرس")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    address = models.CharField(max_length=200, null=True)
+
     def __str__(self):
         return self.name
 
@@ -45,12 +46,23 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, null=True, on_delete= models.CASCADE)
-    product = models.ForeignKey(Product, null=True, on_delete= models.CASCADE)
+    customer = models.ForeignKey(Customer, null=True, on_delete= models.CASCADE,verbose_name = "مشتری")
+    product = models.ForeignKey(Product, null=True, on_delete= models.CASCADE,verbose_name = "محصول")
+    additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=(
         ('CANCELED','CANCELED'),
         ('COMPLETED','COMPLETED'),
-        ('REFUNDED','REFUNDED'),
+        ('PAID','PAID'),
         ('PENDING PAYMENT','PENDING PAYMENT'),
-    ))
+    ),verbose_name = "وضعیت")
+
+
+    def j_date_created(self):
+        return jalali_converter(self.date_created)
+
+
+
+
+
+#
